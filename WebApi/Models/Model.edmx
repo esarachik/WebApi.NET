@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClientsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="Pk_Author_Id" />
+          </Key>
+          <Property Name="Pk_Author_Id" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="255" />
+          <Property Name="MobileNo" Type="char" MaxLength="10" />
+          <Property Name="Fk_Book_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Pk_Book_Id" />
+          </Key>
+          <Property Name="Pk_Book_Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="ISBN" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="50" />
+          <Property Name="Birthdate" Type="datetime" />
+          <Property Name="EmailId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="200" />
+          <Property Name="Location" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK__Author__Fk_Book___4316F928">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="Author" Type="Self.Author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Pk_Book_Id" />
+            </Principal>
+            <Dependent Role="Author">
+              <PropertyRef Name="Fk_Book_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClientsModelStoreContainer">
+          <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Author__Fk_Book___4316F928" Association="Self.FK__Author__Fk_Book___4316F928">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Author" EntitySet="Author" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClientsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Birthdate" Type="DateTime" Precision="3" />
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="ClientsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Authors" EntityType="ClientsModel.Author" />
+          <EntitySet Name="Books" EntityType="ClientsModel.Book" />
+          <AssociationSet Name="FK__Author__Fk_Book___4316F928" Association="ClientsModel.FK__Author__Fk_Book___4316F928">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="Author" EntitySet="Authors" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="Pk_Author_Id" />
+          </Key>
+          <Property Name="Pk_Author_Id" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Fk_Book_Id" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="ClientsModel.FK__Author__Fk_Book___4316F928" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Pk_Book_Id" />
+          </Key>
+          <Property Name="Pk_Book_Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ISBN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Authors" Relationship="ClientsModel.FK__Author__Fk_Book___4316F928" FromRole="Book" ToRole="Author" />
+        </EntityType>
+        <Association Name="FK__Author__Fk_Book___4316F928">
+          <End Type="ClientsModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="ClientsModel.Author" Role="Author" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Pk_Book_Id" />
+            </Principal>
+            <Dependent Role="Author">
+              <PropertyRef Name="Fk_Book_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClientsModelStoreContainer" CdmEntityContainer="ClientsEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ClientsModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ClientsModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="ClientsModel.Author">
+              <MappingFragment StoreEntitySet="Author">
+                <ScalarProperty Name="Fk_Book_Id" ColumnName="Fk_Book_Id" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Pk_Author_Id" ColumnName="Pk_Author_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="ClientsModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pk_Book_Id" ColumnName="Pk_Book_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
