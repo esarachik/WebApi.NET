@@ -1,0 +1,10 @@
+C:\Users\esara\source\repos\CRUDApp\Database\bin\Debug\Database.dacpac
+C:\Users\esara\source\repos\CRUDApp\Database\bin\Debug\Database.dll
+C:\Users\esara\source\repos\CRUDApp\Database\bin\Debug\Database.pdb
+C:\Users\esara\source\repos\CRUDApp\Database\obj\Debug\Database.sqlprojAssemblyReference.cache
+C:\Users\esara\source\repos\CRUDApp\Database\obj\Debug\Model.xml
+C:\Users\esara\source\repos\CRUDApp\Database\obj\Debug\refactor.xml
+C:\Users\esara\source\repos\CRUDApp\Database\obj\Debug\postdeploy.sql
+C:\Users\esara\source\repos\CRUDApp\Database\obj\Debug\predeploy.sql
+C:\Users\esara\source\repos\CRUDApp\Database\obj\Debug\Database.dll
+C:\Users\esara\source\repos\CRUDApp\Database\obj\Debug\Database.pdb
